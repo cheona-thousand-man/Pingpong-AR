@@ -58,5 +58,7 @@ public class StartMenu : MonoBehaviour
             ObjectProvider = default
         };
         Debug.Log($"Joined Player Name: {PlayerData.PlayerName}");
+
+        _runnerInstance.StartGame(startGameArgs);
     }
 }
