@@ -108,6 +108,8 @@ namespace Asteroids.SharedSimple
         private void UpdateReadyDisplay()
         {
 			FindObjectOfType<PlayerSpawner>().StartPlayerSpawner(this);
+			Debug.Log("계속 생성되는 ");
+			Phase = GamePhase.Starting;
 		}
 
         private void UpdateStartingDisplay()

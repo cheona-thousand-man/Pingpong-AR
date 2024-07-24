@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: -1575220252335305295}
   - component: {fileID: -3190520047063578450}
   - component: {fileID: -2001039352498070514}
+  - component: {fileID: 6240843161185883877}
+  - component: {fileID: 8378511660659621961}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -135,7 +137,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 84
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!114 &-3190520047063578450
 MonoBehaviour:
@@ -155,6 +157,8 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: -2001039352498070514}
+  - {fileID: 6240843161185883877}
+  - {fileID: 8378511660659621961}
 --- !u!114 &-2001039352498070514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,3 +181,36 @@ MonoBehaviour:
     Position: 0.01
     Rotation: 0.01
     Scale: 0.01
+--- !u!114 &6240843161185883877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265297789370343261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3490952abdb43719b69ac20ebdcebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationSpeed: 12
+  _acceleration: 5000
+  _maxSpeed: 1000
+--- !u!114 &8378511660659621961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265297789370343261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0aa708ff4d794600802de89c4faeac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _NickName:
+    _length: 0
+    _data:
+      Data: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  _Lives: 0
+  _Score: 0
