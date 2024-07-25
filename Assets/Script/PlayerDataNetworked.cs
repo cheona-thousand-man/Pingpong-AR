@@ -7,7 +7,8 @@ namespace Asteroids.SharedSimple
     public class PlayerDataNetworked : NetworkBehaviour
     {
         // Global static setting
-        private const int WINS = 3;
+        private const int STARTING_WINS = 0;
+        private const int ENDING_WINS = 3;
 
         private ChangeDetector _changeDetector;
 
@@ -32,33 +33,25 @@ namespace Asteroids.SharedSimple
             // Initialized game specific settings
             if (Object.HasStateAuthority)
             {
-                Wins = REMAIN_WINS;
+                Wins = STARTING_WINS;
                 Score = 0;
                 NickName = LocalPlayerData.NickName;
             }
 
-
+            // 향후 UI 업데이트 작업을 위해서 ChangeDetector 가져오기
             _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         }
 
-        // Increase the score by X amount of points
-        public void AddToScore(int points)
+        // Increase the score by 1
+        public void AddToScore()
         {
-            Score += points;
+            Score ++;
         }
 
-        // Decrease the current Wins by 1
-        public void SubtractLife()
+        // Increase the current Wins by 1
+        public void AddToWin()
         {
-            Wins--;
-        }
-
-        // RPC used to send player information to the Host
-        [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
-        private void RpcSetNickName(string nickName)
-        {
-            if (string.IsNullOrEmpty(nickName)) return;
-            NickName = nickName;
+            Wins++;
         }
     }
 }

@@ -1301,8 +1301,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _networkRunnerPrefab: {fileID: 1539138531867727235, guid: 14f8482e831703c4dac1ddc2595766b1, type: 3}
-  _playerName: {fileID: 1201109531}
-  _playerNamePlaceholder: {fileID: 1468398498}
+  _nickName: {fileID: 1201109531}
+  _nickNamePlaceholder: {fileID: 1468398498}
   _roomName: {fileID: 0}
   _gameScenePath: Assets/Scenes/WaitingScene.unity
 --- !u!1 &1801888395
