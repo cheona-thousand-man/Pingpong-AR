@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab:
-    RawGuidValue: 0089fbb26bed3814c942338d1f14e678
+    RawGuidValue: ab554da990fdf4b2d8a64e10b80930f0
 --- !u!114 &258313749
 MonoBehaviour:
   m_ObjectHideFlags: 0
