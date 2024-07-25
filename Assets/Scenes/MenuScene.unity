@@ -234,7 +234,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 200}
-  m_SizeDelta: {x: 300, y: 80}
+  m_SizeDelta: {x: 400, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &386230272
 MonoBehaviour:
@@ -755,7 +755,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 300}
-  m_SizeDelta: {x: 300, y: 80}
+  m_SizeDelta: {x: 400, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201109531
 MonoBehaviour:
@@ -1301,8 +1301,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _networkRunnerPrefab: {fileID: 1539138531867727235, guid: 14f8482e831703c4dac1ddc2595766b1, type: 3}
-  _playerName: {fileID: 1201109531}
-  _playerNamePlaceholder: {fileID: 1468398498}
+  _nickName: {fileID: 1201109531}
+  _nickNamePlaceholder: {fileID: 1468398498}
   _roomName: {fileID: 0}
   _gameScenePath: Assets/Scenes/WaitingScene.unity
 --- !u!1 &1801888395
