@@ -7,8 +7,7 @@ namespace Asteroids.SharedSimple
     public class PlayerDataNetworked : NetworkBehaviour
     {
         // Global static setting
-        private const int STARTING_LIVES = 3;
-
+        private const int WINS = 3;
 
         private ChangeDetector _changeDetector;
 
@@ -20,7 +19,7 @@ namespace Asteroids.SharedSimple
 
         [HideInInspector]
         [Networked]
-        public int Lives { get; private set; }
+        public int Wins { get; private set; }
 
         [HideInInspector]
         [Networked]
@@ -33,7 +32,7 @@ namespace Asteroids.SharedSimple
             // Initialized game specific settings
             if (Object.HasStateAuthority)
             {
-                Lives = STARTING_LIVES;
+                Wins = REMAIN_WINS;
                 Score = 0;
                 NickName = LocalPlayerData.NickName;
             }
@@ -48,10 +47,10 @@ namespace Asteroids.SharedSimple
             Score += points;
         }
 
-        // Decrease the current Lives by 1
+        // Decrease the current Wins by 1
         public void SubtractLife()
         {
-            Lives--;
+            Wins--;
         }
 
         // RPC used to send player information to the Host

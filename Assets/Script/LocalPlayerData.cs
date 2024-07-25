@@ -1,7 +1,5 @@
 using Random = UnityEngine.Random;
 
-namespace Asteroids.SharedSimple
-{
 	public static class LocalPlayerData
 	{
 		private static string _nickName;
@@ -19,4 +17,3 @@ namespace Asteroids.SharedSimple
 			}
 		}
 	}
-}

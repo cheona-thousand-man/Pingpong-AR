@@ -4,16 +4,20 @@ using UnityEngine;
 using Fusion;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class StartMenu : MonoBehaviour
 {
     [SerializeField] private NetworkRunner _networkRunnerPrefab = null;
-    [SerializeField] private TMP_InputField _playerName = null;
-    [SerializeField] private TextMeshProUGUI _playerNamePlaceholder = null;
+    [SerializeField] private TMP_InputField _nickName = null;
+    [SerializeField] private TextMeshProUGUI _nickNamePlaceholder = null;
     [SerializeField] private TMP_InputField _roomName = null;
     [SerializeField] private string _gameScenePath = null;
 
+    // 단말기 별 네트워크 관리자
     private NetworkRunner _runnerInstance = null;
+    // NickName 최대 길이: 16자
+    private const int MAX_NAME_LENGTH = 16;
 
     public void StartShared()
     {
@@ -30,13 +34,14 @@ public class StartMenu : MonoBehaviour
 
     private void SetPlayerData()
     {
-        if (string.IsNullOrWhiteSpace(_playerName.text))
+        if (string.IsNullOrWhiteSpace(_nickName.text))
         {
-            PlayerData.PlayerName = _playerNamePlaceholder.text;
+            // LocalPlayerData에서 입력이 없는 경우 플레이어 Name 자동으로 생성 구현
+            // LocalPlayerData.NickName = _nickNamePlaceholder.text;
         }
         else
         {
-            PlayerData.PlayerName = _playerName.text;
+            LocalPlayerData.NickName = _nickName.text.Substring(0, Mathf.Min(_nickName.text.Length, MAX_NAME_LENGTH));
         }
     }
 
@@ -57,7 +62,7 @@ public class StartMenu : MonoBehaviour
             Scene = SceneRef.FromIndex(SceneUtility.GetBuildIndexByScenePath(_gameScenePath)),
             ObjectProvider = default
         };
-        Debug.Log($"Joined Player Name: {PlayerData.PlayerName}");
+        Debug.Log($"Joined Player Name: {LocalPlayerData.NickName}");
 
         _runnerInstance.StartGame(startGameArgs);
     }
