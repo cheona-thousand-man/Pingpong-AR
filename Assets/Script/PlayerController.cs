@@ -70,7 +70,8 @@ public class PlayerController : NetworkBehaviour
 
             Vector3 spawnPosition = _rigidbody.position + transform.up * 2;
             Quaternion rotation = Quaternion.identity;
-            Runner.Spawn(_ball, spawnPosition, rotation, Runner.LocalPlayer);
+            BallBehaviour ball = Runner.Spawn(_ball, spawnPosition, rotation, Runner.LocalPlayer);
+            ball.ServeBall(-transform.forward * 20);
 
             _serveCooldown = TickTimer.CreateFromSeconds(Runner, _delayBetweenServes);
         }

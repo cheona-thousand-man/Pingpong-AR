@@ -18,10 +18,8 @@ public class BallBehaviour : NetworkBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
-
-    public override void Spawned()
+    public void ServeBall(Vector3 force)
     {
-        Vector3 force = Object.transform.position.normalized * 22f;
         _rigidbody.AddForce(-force);
     }
 }
