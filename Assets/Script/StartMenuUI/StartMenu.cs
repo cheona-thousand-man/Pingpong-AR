@@ -22,6 +22,7 @@ public class StartMenu : MonoBehaviour
     public void StartShared()
     {
         SetPlayerData();
+
         if (_roomName == null)
         {
             StartGame(GameMode.Shared, "default2", _gameScenePath);
@@ -60,7 +61,8 @@ public class StartMenu : MonoBehaviour
             GameMode = mode,
             SessionName = roomName,
             Scene = SceneRef.FromIndex(SceneUtility.GetBuildIndexByScenePath(_gameScenePath)),
-            ObjectProvider = default
+            ObjectProvider = default,
+            PlayerCount = 2
         };
         Debug.Log($"Joined Player Name: {LocalPlayerData.NickName}");
 
