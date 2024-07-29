@@ -19,7 +19,7 @@ namespace Asteroids.SharedSimple
 
         public void SpawnBall(PlayerRef servePlayer)
         {
-            // 현재 플레이어가 공을 생성할 권한이 있는지 확인
+            // 현재 플레이어가 공을 생성할 권한이 있는지 확인(서브 차례인 플레이어가 공 생성 가능)
             if (Runner.LocalPlayer != servePlayer) return;
             Debug.Log("공 생성 권한 있음");
 

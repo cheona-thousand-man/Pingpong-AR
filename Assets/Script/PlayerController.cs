@@ -31,7 +31,10 @@ public class PlayerController : NetworkBehaviour
         {
             if (GetInput<PlayerInput>(out var input))
             {
-                Move(input);
+                // 이동 로직
+                Move(input); // 3D 게임 구현 시, 키보드 이동
+                // MoveByCamera(); // AR게임 구현 시, 카메라가 탑재된 디바이스 이동에 따른 이동 구현
+
                 SpawnBall(input);
             }
         }
@@ -62,6 +65,11 @@ public class PlayerController : NetworkBehaviour
         _rigidbody.MovePosition(newPosition);
     }
 
+        private void MoveByCamera()
+    {
+        throw new NotImplementedException();
+    }
+
     private void SpawnBall(PlayerInput input)
     {
         if (input.Buttons.WasPressed(ButtonsPrevious, PlayerButtons.Fire))
@@ -71,7 +79,7 @@ public class PlayerController : NetworkBehaviour
             Vector3 spawnPosition = _rigidbody.position + transform.up * 2;
             Quaternion rotation = Quaternion.identity;
             BallBehaviour ball = Runner.Spawn(_ball, spawnPosition, rotation, Runner.LocalPlayer);
-            ball.ServeBall(-transform.forward * 20);
+            ball.ServeBall(transform.forward * 20);
 
             _serveCooldown = TickTimer.CreateFromSeconds(Runner, _delayBetweenServes);
         }

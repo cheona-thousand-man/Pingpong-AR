@@ -20,6 +20,6 @@ public class BallBehaviour : NetworkBehaviour
     }
     public void ServeBall(Vector3 force)
     {
-        _rigidbody.AddForce(-force);
+        _rigidbody.AddForce(force);
     }
 }
