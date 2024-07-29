@@ -111,7 +111,7 @@ namespace Asteroids.SharedSimple
         private void UpdateReadyDisplay()
         {
             FindObjectOfType<PlayerSpawner>().StartPlayerSpawner();
-            Debug.Log("계속 생성되는 ");
+            // 플레이어 생성 후 게임 Phase 변경
             Phase = GamePhase.Starting;
         }
 
@@ -142,7 +142,6 @@ namespace Asteroids.SharedSimple
         public void PlayerJoined(PlayerRef player)
         {
             _dontCheckforWinTimer = TickTimer.CreateFromSeconds(Runner, 5);
-            Debug.Log($"PlayerJoined 호출됨: PlayerRef = {player}");
 
             // 일정 시간 대기 후에 AddPlayer 호출
             StartCoroutine(DelayedAddPlayer(player));
@@ -155,8 +154,6 @@ namespace Asteroids.SharedSimple
             var networkObject = Runner.GetPlayerObject(player);
             if (networkObject != null)
             {
-                Debug.Log($"NetworkObject 찾음: {networkObject}");
-
                 var playerDataNetworked = networkObject.GetComponent<PlayerDataNetworked>();
                 if (playerDataNetworked != null)
                 {
