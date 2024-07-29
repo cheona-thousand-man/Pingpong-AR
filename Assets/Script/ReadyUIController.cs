@@ -12,10 +12,9 @@ namespace Asteroids.SharedSimple
 
         private Dictionary<PlayerRef, GameObject> playerEntries = new Dictionary<PlayerRef, GameObject>();
 
-        public void AddPlayer(PlayerRef player, PlayerDataNetworked playerDataNetworked)
+        public void AddPlayerOnEntryUI(PlayerRef player, PlayerDataNetworked playerDataNetworked)
         {
-            Debug.Log("AddPlayer 호출됨: " + player.PlayerId);
-
+            // 이미 포함된 플레이어 정보 제외
             if (playerEntries.ContainsKey(player)) return;
 
             if (playerDataNetworked == null)
@@ -24,24 +23,23 @@ namespace Asteroids.SharedSimple
                 return;
             }
 
+            // UI요소 공간 생성
             GameObject playerEntry = Instantiate(playerEntryPrefab, playerListPanel.transform);
-            playerEntry.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -50 * playerEntries.Count); // 각 항목을 적절히 배치
+            playerEntry.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -150 * playerEntries.Count); // 각 항목을 적절히 배치
             playerEntry.GetComponent<RectTransform>().sizeDelta = new Vector2(300, 50); // 크기 조정
 
-            Debug.Log("playerEntry 인스턴스화됨: " + playerEntry.name);
-
+            // UI에 플레이어 정보 표시
             TextMeshProUGUI playerNameText = playerEntry.transform.Find("PlayerNameText").GetComponent<TextMeshProUGUI>();
             if (playerNameText == null)
             {
                 Debug.LogError("PlayerNameText를 찾을 수 없습니다!");
                 return;
             }
-
             playerNameText.text = "Player" + player.PlayerId + " " + playerDataNetworked.NickName;
-            Debug.Log("PlayerNameText 설정됨: " + playerNameText.text);
 
+            // Player 정보를 playerEntry Dictionary에 추가
             playerEntries[player] = playerEntry;
-            Debug.Log("Player 추가됨: " + player.PlayerId);
+            Debug.Log("대기열에 Player 추가됨: " + player.PlayerId);
         }
     }
 }

@@ -13,6 +13,7 @@ public class BallBehaviour : NetworkBehaviour
     [Networked] public Quaternion Rotation {get; set;}
 
     private Rigidbody _rigidbody;
+    // private 
 
     private void Awake()
     {

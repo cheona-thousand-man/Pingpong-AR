@@ -402,8 +402,8 @@ GameObject:
   - component: {fileID: 378406611}
   - component: {fileID: 378406610}
   m_Layer: 0
-  m_Name: TableTop
-  m_TagString: Untagged
+  m_Name: TableDown
+  m_TagString: TableDown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 709320823}
   - component: {fileID: 709320822}
   m_Layer: 5
-  m_Name: PlayerREadyPanel
+  m_Name: PlayerListPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -843,7 +843,7 @@ GameObject:
   - component: {fileID: 1083705379}
   m_Layer: 0
   m_Name: Court
-  m_TagString: Untagged
+  m_TagString: Court
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -949,7 +949,7 @@ GameObject:
   - component: {fileID: 1485156478}
   m_Layer: 0
   m_Name: TableNet
-  m_TagString: Untagged
+  m_TagString: TableNet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1121,8 +1121,8 @@ GameObject:
   - component: {fileID: 1818708933}
   - component: {fileID: 1818708932}
   m_Layer: 0
-  m_Name: TableBottom
-  m_TagString: Untagged
+  m_Name: TableUp
+  m_TagString: TableUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

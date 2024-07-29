@@ -165,7 +165,7 @@ namespace Asteroids.SharedSimple
                         _playerDataNetworkedIds.Add(playerDataNetworked);
                     }
 
-                    FindObjectOfType<ReadyUIController>().AddPlayer(player, playerDataNetworked);
+                    FindObjectOfType<ReadyUIController>().AddPlayerOnEntryUI(player, playerDataNetworked);
                     Debug.Log("PlayerJoined");
                 }
                 else
