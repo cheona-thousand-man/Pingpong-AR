@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using Fusion;
 
@@ -9,8 +10,17 @@ namespace Asteroids.SharedSimple
     {
         public GameObject playerListPanel;
         public GameObject playerEntryPrefab;
+        [Networked] private int playerCount { get; set; } = 0;
+
+        [SerializeField] private Button myButton;
 
         private Dictionary<PlayerRef, GameObject> playerEntries = new Dictionary<PlayerRef, GameObject>();
+
+        public void Start()
+        {
+            myButton.interactable = false;
+            myButton.onClick.AddListener(OnMyButtonClick);
+        }
 
         public void AddPlayer(PlayerRef player, PlayerDataNetworked playerDataNetworked)
         {
@@ -42,6 +52,23 @@ namespace Asteroids.SharedSimple
 
             playerEntries[player] = playerEntry;
             Debug.Log("Player 추가됨: " + player.PlayerId);
+
+            playerCount++;
+
+            Debug.Log("Player 숫자 " + playerCount);
+
+            if (playerCount == 2) {
+                myButton.interactable = true;
+            }
+        }
+
+        private void OnMyButtonClick()
+        {
+            // 버튼 클릭 시 실행할 코드
+            playerListPanel.SetActive(false);
+            playerEntryPrefab.SetActive(false);
+            myButton.gameObject.SetActive(false);
+            Debug.Log("playerListPanel과 playerEntryPrefab이 비활성화되었습니다.");
         }
     }
 }
