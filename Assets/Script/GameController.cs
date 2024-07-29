@@ -51,7 +51,7 @@ namespace Asteroids.SharedSimple
         private void Awake()
         {
             // MasterClientObject 플래그 설정: 서버에서만 관리되며 클라이언트에는 동기화되지 않음
-            // 게임 로직이나 데이터는 마스터 클라이언트에서만 조작
+            // [Networked] 속성은 마스터 클라이언트에서만 조작 & non-Networked 속성은 로컬 클라이언트에서 조작 가능
             // 사용목적: 네트워크 동기화를 줄여 부하 감소
             GetComponent<NetworkObject>().Flags |= NetworkObjectFlags.MasterClientObject;
             Singleton = this;
@@ -139,11 +139,6 @@ namespace Asteroids.SharedSimple
             Phase = GamePhase.Ending;
         }
 
-        public void TrackNewPlayer(NetworkBehaviourId playerDataNetworkedId)
-        {
-            _playerDataNetworkedIds.Add(playerDataNetworkedId);
-        }
-
         public void PlayerJoined(PlayerRef player)
         {
             _dontCheckforWinTimer = TickTimer.CreateFromSeconds(Runner, 5);
@@ -167,6 +162,12 @@ namespace Asteroids.SharedSimple
                 {
                     Debug.Log($"PlayerDataNetworked 찾음: {playerDataNetworked.NickName}");
 
+                    // GameController의 PlayerDataList에 없다면 PlayerData 추가
+                    if (!_playerDataNetworkedIds.Contains(playerDataNetworked))
+                    {
+                        _playerDataNetworkedIds.Add(playerDataNetworked);
+                    }
+
                     FindObjectOfType<ReadyUIController>().AddPlayer(player, playerDataNetworked);
                     Debug.Log("PlayerJoined");
                 }
@@ -178,6 +179,22 @@ namespace Asteroids.SharedSimple
             else
             {
                 Debug.LogError("NetworkObject를 찾을 수 없습니다: " + player.PlayerId);
+            }
+
+            // 디버깅용
+            PrintPlayerDataList();
+        }
+
+        // PlayerDataList에 저장된 목록 출력(디버깅용)
+        private void PrintPlayerDataList()
+        {
+            Debug.Log($"리스트에 있는 플레이어 수: {_playerDataNetworkedIds.Count}");
+            foreach (var playerData in _playerDataNetworkedIds)
+            {
+                if (Runner.TryFindBehaviour(playerData, out PlayerDataNetworked playerDataNetworkedComponent))
+                {
+                    Debug.Log($"저장된 플레이어 정보: {playerDataNetworkedComponent.NickName} {playerDataNetworkedComponent.Wins} {playerDataNetworkedComponent.Score}");
+                }
             }
         }
     }
