@@ -45,7 +45,7 @@ namespace Asteroids.SharedSimple
         // Increase the score by 1
         public void AddToScore()
         {
-            Score ++;
+            Score++;
         }
 
         // Increase the current Wins by 1
