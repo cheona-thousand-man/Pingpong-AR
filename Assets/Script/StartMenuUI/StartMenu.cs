@@ -24,11 +24,11 @@ public class StartMenu : MonoBehaviour
         SetPlayerData();
         if (_roomName == null)
         {
-            StartGame(GameMode.Shared, "default", _gameScenePath);
+            JoinGame(GameMode.Shared, "default", _gameScenePath);
         }
         else
         {
-            StartGame(GameMode.Shared, _roomName.text, _gameScenePath);
+            JoinGame(GameMode.Shared, _roomName.text, _gameScenePath);
         }
     }
 
@@ -45,7 +45,7 @@ public class StartMenu : MonoBehaviour
         }
     }
 
-    private void StartGame(GameMode mode, string roomName, string sceneName)
+    private void JoinGame(GameMode mode, string roomName, string sceneName)
     {
         _runnerInstance = FindObjectOfType<NetworkRunner>();
         if (_runnerInstance == null)
@@ -55,7 +55,7 @@ public class StartMenu : MonoBehaviour
 
         _runnerInstance.ProvideInput = true;
 
-        var startGameArgs = new StartGameArgs()
+        var JoinGameArgs = new StartGameArgs()
         {
             GameMode = mode,
             SessionName = roomName,
@@ -64,6 +64,6 @@ public class StartMenu : MonoBehaviour
         };
         Debug.Log($"Joined Player Name: {LocalPlayerData.NickName}");
 
-        _runnerInstance.StartGame(startGameArgs);
+        _runnerInstance.StartGame(JoinGameArgs);
     }
 }

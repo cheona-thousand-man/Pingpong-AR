@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Asteroids.SharedSimple;
 using Fusion;
 using UnityEngine;
 
@@ -13,14 +14,40 @@ public class BallBehaviour : NetworkBehaviour
     [Networked] public Quaternion Rotation {get; set;}
 
     private Rigidbody _rigidbody;
-    // private 
+    private List<NetworkBehaviourId> _playerDataNetworkedIds;
 
-    private void Awake()
+    public override void Spawned()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _playerDataNetworkedIds = FindObjectOfType<GameController>().GetPlayerDataNetworkedIds();
     }
+
     public void ServeBall(Vector3 force)
     {
         _rigidbody.AddForce(force);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+
+        }
+        else if (other.gameObject.CompareTag("TableUp"))
+        {
+            
+        }
+        else if (other.gameObject.CompareTag("TableDown"))
+        {
+            
+        }
+        else if (other.gameObject.CompareTag("TableNet"))
+        {
+            
+        }
+        else if (other.gameObject.CompareTag("Court"))
+        {
+            
+        }
     }
 }

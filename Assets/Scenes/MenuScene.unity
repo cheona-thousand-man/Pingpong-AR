@@ -481,7 +481,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start
+  m_text: Join
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1304,7 +1304,7 @@ MonoBehaviour:
   _nickName: {fileID: 1201109531}
   _nickNamePlaceholder: {fileID: 1468398498}
   _roomName: {fileID: 0}
-  _gameScenePath: Assets/Scenes/WaitingScene.unity
+  _gameScenePath: Assets/Scenes/GameScene.unity
 --- !u!1 &1801888395
 GameObject:
   m_ObjectHideFlags: 0

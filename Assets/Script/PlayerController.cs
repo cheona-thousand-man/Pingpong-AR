@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : NetworkBehaviour
 {
+
     // Game Session AGNOSTIC Settings
     [SerializeField] private float _moveSpeed = 10.0f;
     [SerializeField] private BallBehaviour _ball;
@@ -11,6 +12,7 @@ public class PlayerController : NetworkBehaviour
     // Local Runtime references
     private Rigidbody _rigidbody;
     private Camera _mainCamera;
+    private GameController _gameController;
     private NetworkButtons ButtonsPrevious {get; set;}
     private TickTimer _serveCooldown;
     private float _delayBetweenServes = 0.5f;
@@ -22,6 +24,7 @@ public class PlayerController : NetworkBehaviour
         // We're controlling the ship using forces, so grab the rigidbody
         _rigidbody = GetComponent<Rigidbody>();
         _mainCamera = Camera.main;
+        _gameController = FindObjectOfType<GameController>();
     }
 
     public override void FixedUpdateNetwork()
@@ -35,7 +38,11 @@ public class PlayerController : NetworkBehaviour
                 Move(input); // 3D 게임 구현 시, 키보드 이동
                 // MoveByCamera(); // AR게임 구현 시, 카메라가 탑재된 디바이스 이동에 따른 이동 구현
 
-                SpawnBall(input);
+                // gameController에서 서브 가능 & 서브인 플레이어 차례인 플레이어만 공 생성 가능
+                if (_gameController.CanServiceBall && (_gameController.ServePlayerId.Equals(Runner.LocalPlayer)))
+                {
+                    SpawnBall(input);
+                }
             }
         }
         else
@@ -80,6 +87,9 @@ public class PlayerController : NetworkBehaviour
             Quaternion rotation = Quaternion.identity;
             BallBehaviour ball = Runner.Spawn(_ball, spawnPosition, rotation, Runner.LocalPlayer);
             ball.ServeBall(transform.forward * 20);
+
+            // 공을 던진 후 공이 사라지기 전까지는 서브 불가능하게 처리
+            _gameController.CanServiceBall = false;
 
             _serveCooldown = TickTimer.CreateFromSeconds(Runner, _delayBetweenServes);
         }
