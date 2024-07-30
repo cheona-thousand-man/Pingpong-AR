@@ -24,7 +24,7 @@ public class StartMenu : MonoBehaviour
         SetPlayerData();
         if (_roomName == null)
         {
-            StartGame(GameMode.Shared, "default2", _gameScenePath);
+            StartGame(GameMode.Shared, "default", _gameScenePath);
         }
         else
         {
