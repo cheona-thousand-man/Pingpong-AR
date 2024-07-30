@@ -10,7 +10,6 @@ public class StartMenu : MonoBehaviour
 {
     [SerializeField] private NetworkRunner _networkRunnerPrefab = null;
     [SerializeField] private TMP_InputField _nickName = null;
-    [SerializeField] private TextMeshProUGUI _nickNamePlaceholder = null;
     [SerializeField] private TMP_InputField _roomName = null;
     [SerializeField] private string _gameScenePath = null;
 
@@ -37,7 +36,6 @@ public class StartMenu : MonoBehaviour
         if (string.IsNullOrWhiteSpace(_nickName.text))
         {
             // LocalPlayerData에서 입력이 없는 경우 플레이어 Name 자동으로 생성 구현
-            // LocalPlayerData.NickName = _nickNamePlaceholder.text;
         }
         else
         {

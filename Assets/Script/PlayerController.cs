@@ -88,7 +88,7 @@ public class PlayerController : NetworkBehaviour
             BallBehaviour ball = Runner.Spawn(_ball, spawnPosition, rotation, Runner.LocalPlayer);
             ball.ServeBall(transform.forward * 20);
 
-            // 공을 던진 후 공이 사라지기 전까지는 서브 불가능하게 처리
+            // 공을 던진 후: 서브 횟수 처리 & 공이 사라지기 전까지는 서브 불가능하게 처리
             _gameController.CanServiceBall = false;
 
             _serveCooldown = TickTimer.CreateFromSeconds(Runner, _delayBetweenServes);
