@@ -108,14 +108,14 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    // 플레이어의 위치를 화면 경계 내로 제한하는 메서드
     private Vector3 ClampPositionToScreen(Vector3 position)
     {
         Vector3 viewportPosition = _mainCamera.WorldToViewportPoint(position);
 
-        // viewportPosition.x와 y 값을 0과 1 사이로 제한하여 화면 밖으로 나가지 않도록 합니다.
-        viewportPosition.x = Mathf.Clamp(viewportPosition.x, 0.0f, 1.0f);
-        viewportPosition.y = Mathf.Clamp(viewportPosition.y, 0.0f, 1.0f);
+        // viewportPosition을 약간 더 확장하여 화면 경계를 벗어나지 않도록 clamp합니다.
+        float margin = -0.4f;
+        viewportPosition.x = Mathf.Clamp(viewportPosition.x, -margin, 1.0f + margin);
+        viewportPosition.y = Mathf.Clamp(viewportPosition.y, -margin, 1.0f + margin);
 
         // 제한된 viewportPosition을 다시 월드 좌표로 변환합니다.
         return _mainCamera.ViewportToWorldPoint(viewportPosition);

@@ -12,4 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene.unity
     guid: 369638f1e03dd814bb329015bbdf84b8
   m_configObjects:
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: a2d53593daee1469db834cf0cf9958d8, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: d35756adc7c5b4126966f5ab275a85e5, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 526cedbcbe743488ca78d0a2f794ffec, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 63c582ab9aded49e39ccdfc1ebcc5bbf, type: 2}
