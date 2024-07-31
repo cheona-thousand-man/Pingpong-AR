@@ -8,6 +8,7 @@ public class PlayerController : NetworkBehaviour
     // Game Session AGNOSTIC Settings
     [SerializeField] private float _moveSpeed = 10.0f;
     [SerializeField] private BallBehaviour _ball;
+    [SerializeField] private float _rotationSpeed = 10.0f;
 
     // Local Runtime references
     private Rigidbody _rigidbody;
@@ -59,7 +60,7 @@ public class PlayerController : NetworkBehaviour
         // 플레이어의 좌우 입력(HorizontalInput)에 따라 이동 속도를 계산합니다.
         // Mathf.Clamp를 사용하여 입력 값을 -1과 1 사이로 제한합니다.
         float horizontalInput = Mathf.Clamp(input.HorizontalInput, -1, 1);
-        
+
         // 이동 속도를 계산합니다.
         Vector3 movement = xform.right * horizontalInput * _moveSpeed * Runner.DeltaTime;
 
@@ -70,9 +71,21 @@ public class PlayerController : NetworkBehaviour
         newPosition = ClampPositionToScreen(newPosition);
 
         _rigidbody.MovePosition(newPosition);
+
+        // 회전 각도 계산 및 적용
+        float rotationAngle = horizontalInput * -45f; // 최대 45도 회전
+        Quaternion targetRotation = Quaternion.Euler(0, rotationAngle, 0);
+
+        // 현재 회전
+        Quaternion currentRotation = _rigidbody.rotation;
+
+        // 부드러운 회전을 위해 Slerp 사용
+        Quaternion newRotation = Quaternion.Slerp(currentRotation, targetRotation, Time.deltaTime * _rotationSpeed);
+
+        _rigidbody.MoveRotation(newRotation);
     }
 
-        private void MoveByCamera()
+    private void MoveByCamera()
     {
         throw new NotImplementedException();
     }
