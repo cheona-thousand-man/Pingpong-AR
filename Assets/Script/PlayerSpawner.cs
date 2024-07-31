@@ -23,8 +23,19 @@ public class PlayerSpawner : NetworkBehaviour
         int index = player.PlayerId % _spawnPoints.Length;
         var spawnPosition = _spawnPoints[index].transform.position;
 
-        var playerObject = Runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
-        // Set Player Object to facilitate access across systems.
-        Runner.SetPlayerObject(player, playerObject);
+        if (player.PlayerId == 1) {
+            Quaternion rotation = Quaternion.Euler(0, 0, 0);
+            var playerObject = Runner.Spawn(_playerPrefab, spawnPosition, rotation, player);
+            // Set Player Object to facilitate access across systems.
+            Runner.SetPlayerObject(player, playerObject);
+        }
+
+        if (player.PlayerId == 2)
+        {
+            Quaternion rotation = Quaternion.Euler(0, 180, 0);
+            var playerObject = Runner.Spawn(_playerPrefab, spawnPosition, rotation, player);
+            // Set Player Object to facilitate access across systems.
+            Runner.SetPlayerObject(player, playerObject);
+        }
     }
 }
