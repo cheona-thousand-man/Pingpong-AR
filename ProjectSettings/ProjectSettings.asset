@@ -140,7 +140,12 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 1463515577894852209, guid: 526cedbcbe743488ca78d0a2f794ffec, type: 2}
+  - {fileID: 11400000, guid: d35756adc7c5b4126966f5ab275a85e5, type: 2}
+  - {fileID: 11400000, guid: 63c582ab9aded49e39ccdfc1ebcc5bbf, type: 2}
+  - {fileID: 4800000, guid: e7c77f6eaab324a819efdc13b8125a39, type: 3}
+  - {fileID: 4800000, guid: 6743a50a812740be8c0aa3fccc46fae9, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -583,7 +588,7 @@ PlayerSettings:
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
-  cameraUsageDescription: 
+  cameraUsageDescription: Augmented Reality requires the camera
   locationUsageDescription: 
   microphoneUsageDescription: 
   bluetoothUsageDescription: 
@@ -837,6 +842,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     Android: FUSION_WEAVER;FUSION2
     Standalone: FUSION_WEAVER;FUSION2
+    iPhone: UNITY_XR_ARKIT_LOADER_ENABLED;FUSION_WEAVER;FUSION2
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
@@ -943,7 +949,7 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: 31e4007d-1ebd-4bda-8c65-740eeccc6092
   framebufferDepthMemorylessMode: 0
