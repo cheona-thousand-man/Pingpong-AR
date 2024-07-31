@@ -104,7 +104,10 @@ public class PlayerController : NetworkBehaviour
             ball.ServeBall(transform.forward * 20);
 
             // 공을 던진 후: 서브 횟수 처리 & 공이 사라지기 전까지는 서브 불가능하게 처리
-            _gameController.CanServiceBall = false;
+            // 마스터 클라이언트에서만 처리 되기에 Rpc 처리 필요
+            _gameController.Rpc_SetCantSeriveBall();
+            // 공 소유자 설정
+            ball.Owner = Object.InputAuthority;
 
             _serveCooldown = TickTimer.CreateFromSeconds(Runner, _delayBetweenServes);
         }

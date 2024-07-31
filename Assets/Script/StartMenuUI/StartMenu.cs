@@ -23,7 +23,7 @@ public class StartMenu : MonoBehaviour
         SetPlayerData();
         if (_roomName == null)
         {
-            JoinGame(GameMode.Shared, "default", _gameScenePath);
+            JoinGame(GameMode.Shared, "default_cna_logic", _gameScenePath);
         }
         else
         {

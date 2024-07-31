@@ -32,7 +32,7 @@ public class GameController : NetworkBehaviour, IPlayerJoined
     [Networked] public NetworkBehaviourId Player1 { get; private set; }
     [Networked] public NetworkBehaviourId Player2 { get; private set; }
     // PingPong 순서 관리
-    [Networked] public PlayerRef ServePlayerId { get; private set; }
+    [Networked] public PlayerRef ServePlayerId { get; set; }
     [Networked] public int ServingCount { get; set; } = 0;
     [Networked] public NetworkBool CanServiceBall { get; set; } = false;
 
@@ -237,4 +237,16 @@ public class GameController : NetworkBehaviour, IPlayerJoined
         ServePlayerId = NetworkUtilities.GetPlayerRefFromNetworkBehaviourId(Runner, Player1);
     }
 
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    internal void Rpc_SetServePlayer(PlayerRef nextServePlayer)
+    {
+        ServePlayerId = nextServePlayer;
+        CanServiceBall = true;
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    internal void Rpc_SetCantSeriveBall()
+    {
+        CanServiceBall = false;
+    }
 }
