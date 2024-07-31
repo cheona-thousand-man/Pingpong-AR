@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : NetworkBehaviour
 {
 
+
     // Game Session AGNOSTIC Settings
     [SerializeField] private float _moveSpeed = 10.0f;
     [SerializeField] private BallBehaviour _ball;
@@ -26,6 +27,7 @@ public class PlayerController : NetworkBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _mainCamera = Camera.main;
         _gameController = FindObjectOfType<GameController>();
+
     }
 
     public override void FixedUpdateNetwork()

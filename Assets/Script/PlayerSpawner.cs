@@ -1,11 +1,11 @@
 using Fusion;
 using UnityEngine;
 
-// Therefore none of its parameters need to be [Networked].
 public class PlayerSpawner : NetworkBehaviour
 {
-    // References to the NetworkObject prefab to be used for the players' object.
     [SerializeField] private NetworkPrefabRef _playerPrefab = NetworkPrefabRef.Empty;
+    public GameObject player1Camera;
+    public GameObject player2Camera;
 
     private SpawnPoint[] _spawnPoints = null;
 
@@ -15,27 +15,27 @@ public class PlayerSpawner : NetworkBehaviour
         _spawnPoints = FindObjectsOfType<SpawnPoint>();
     }
 
-    // Spawn a player.
-    // The spawn point is chosen in the _spawnPoints array using the implicit playerRef to int conversion 
     public void SpawnPlayer(PlayerRef player)
     {
-        // Modulo is used in case there are more players than spawn points.
         int index = player.PlayerId % _spawnPoints.Length;
         var spawnPosition = _spawnPoints[index].transform.position;
 
-        if (player.PlayerId == 1) {
-            Quaternion rotation = Quaternion.Euler(0, 0, 0);
-            var playerObject = Runner.Spawn(_playerPrefab, spawnPosition, rotation, player);
-            // Set Player Object to facilitate access across systems.
-            Runner.SetPlayerObject(player, playerObject);
+        var playerObject = Runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+
+        if (player.PlayerId == 1)
+        {
+            player1Camera.SetActive(true);
+            player2Camera.SetActive(false);
+        }
+        else if (player.PlayerId == 2)
+        {
+            player1Camera.SetActive(false);
+            player2Camera.SetActive(true);
+            // Ensure the rotation is applied instantly
+            playerObject.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
-        if (player.PlayerId == 2)
-        {
-            Quaternion rotation = Quaternion.Euler(0, 180, 0);
-            var playerObject = Runner.Spawn(_playerPrefab, spawnPosition, rotation, player);
-            // Set Player Object to facilitate access across systems.
-            Runner.SetPlayerObject(player, playerObject);
-        }
+        // Set Player Object to facilitate access across systems.
+        Runner.SetPlayerObject(player, playerObject);
     }
 }
