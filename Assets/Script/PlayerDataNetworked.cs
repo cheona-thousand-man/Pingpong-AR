@@ -44,11 +44,19 @@ public class PlayerDataNetworked : NetworkBehaviour
     public void AddToScore()
     {
         Score++;
+        Rpc_PlayerScoreUpdate();
     }
 
     // Increase the current Wins by 1
     public void AddToWin()
     {
         Wins++;
+        Rpc_PlayerScoreUpdate();
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    private void Rpc_PlayerScoreUpdate()
+    {
+        Debug.Log($"플레이어 {NickName} 점수 획득: {Score} {Wins}");
     }
 }
