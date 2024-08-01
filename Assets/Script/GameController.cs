@@ -229,12 +229,25 @@ public class GameController : NetworkBehaviour, IPlayerJoined
             }
     }
 
-    // 첫 순서가 마스터 클라이언트(플레이어1)이므로 RPC 미사용
+     // 첫 순서가 마스터 클라이언트(플레이어1)이므로 RPC 미사용
     public void GameStartButtonOn()
     {
         _startUI.SetActive(false); // 비활성화
         CanServiceBall = true;
         ServePlayerId = NetworkUtilities.GetPlayerRefFromNetworkBehaviourId(Runner, Player1);
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    internal void Rpc_SetServePlayer(PlayerRef nextServePlayer)
+    {
+        ServePlayerId = nextServePlayer;
+        CanServiceBall = true;
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    internal void Rpc_SetCantSeriveBall()
+    {
+        CanServiceBall = false;
     }
 
 }
