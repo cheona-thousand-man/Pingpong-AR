@@ -33,6 +33,11 @@ public class BallBehaviour : NetworkBehaviour
             AddScoreToOwner();
             StartCoroutine(DroppedBallDespawn());
         }
+
+        if (CheckBallDisappeared())
+        {
+
+        }
     }
 
     private void OnCollisionEnter(Collision other)
@@ -74,6 +79,19 @@ public class BallBehaviour : NetworkBehaviour
     private bool CheckBallStopped()
     {
         return _rigidbody.velocity == Vector3.zero && _rigidbody.angularVelocity == Vector3.zero;
+    }
+
+    private bool CheckBallDisappeared()
+    {
+        if (_rigidbody.transform.position.y >= 3f || _rigidbody.transform.position.y <= 0.8f)
+        {
+            AddScoreToOwner();
+            StartCoroutine(DroppedBallDespawn());
+
+            return true;
+        }
+
+        return false;
     }
 
     public void SetOwner(PlayerRef playerRef)
