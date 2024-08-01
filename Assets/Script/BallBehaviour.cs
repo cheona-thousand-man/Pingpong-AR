@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BallBehaviour : NetworkBehaviour
 {
-    [Networked] public string Owner {get; set;}
+    [Networked] public PlayerRef Owner {get; set;}
     [Networked] public bool IsServed {get; set;}
     [Networked] public bool IsBounced {get; set;}
     [Networked] public Vector3 BallState {get; set;}

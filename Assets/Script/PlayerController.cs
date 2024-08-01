@@ -98,13 +98,32 @@ public class PlayerController : NetworkBehaviour
         {
             if (_serveCooldown.ExpiredOrNotRunning(Runner) == false) return;
 
-            Vector3 spawnPosition = _rigidbody.position + transform.up * 2;
+            // 공을 생성한 플레이어나 누구냐에 따라 공 생성위치 조정
+            Vector3 spawnPosition = new Vector3();
+            // Player1인 경우
+            if (Runner.LocalPlayer.Equals(NetworkUtilities.GetPlayerRefFromNetworkBehaviourId(Runner, _gameController.Player1)))
+            {
+                // spawnPosition = _rigidbody.position + transform.up * 2;
+                spawnPosition = new Vector3(_rigidbody.position.x, 1.05f, _rigidbody.position.z + 1f);
+            }
+            // Player2인 경우
+            else if (Runner.LocalPlayer.Equals(NetworkUtilities.GetPlayerRefFromNetworkBehaviourId(Runner, _gameController.Player2)))
+            {
+                // spawnPosition = _rigidbody.position + transform.up * 2;
+                spawnPosition = new Vector3(_rigidbody.position.x, 1.05f, _rigidbody.position.z - 1f);
+            }
+            
             Quaternion rotation = Quaternion.identity;
             BallBehaviour ball = Runner.Spawn(_ball, spawnPosition, rotation, Runner.LocalPlayer);
-            ball.ServeBall(transform.forward * 20);
+
+            // 캐릭터 앞으로 공 발사
+            ball.ServeBall(transform.forward * 30);
 
             // 공을 던진 후: 서브 횟수 처리 & 공이 사라지기 전까지는 서브 불가능하게 처리
-            _gameController.CanServiceBall = false;
+            // 마스터 클라이언트에서만 처리 되기에 Rpc 처리 필요
+            _gameController.Rpc_SetCantSeriveBall();
+            // 공 소유자 설정
+            ball.Owner = Object.InputAuthority;
 
             _serveCooldown = TickTimer.CreateFromSeconds(Runner, _delayBetweenServes);
         }
