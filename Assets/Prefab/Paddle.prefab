@@ -210,5 +210,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 10
-  _ball: {fileID: 815662814762735867, guid: c1b94d56e892c2c4eb2df61f9024ee56, type: 3}
+  _ball: {fileID: 3773103639881274641, guid: d0e60c31abfaced4d920a7f1bf53a680, type: 3}
   _rotationSpeed: 20

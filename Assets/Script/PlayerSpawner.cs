@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerSpawner : NetworkBehaviour
 {
     [SerializeField] private NetworkPrefabRef _playerPrefab = NetworkPrefabRef.Empty;
+    [SerializeField] private NetworkPrefabRef _playerModelPrefab = NetworkPrefabRef.Empty;
     public GameObject player1Camera;
     public GameObject player2Camera;
 
@@ -19,6 +20,12 @@ public class PlayerSpawner : NetworkBehaviour
     {
         int index = player.PlayerId % _spawnPoints.Length;
         var spawnPosition = _spawnPoints[index].transform.position;
+
+        // 이상한 다른 프리팹을 가져오는 오류 방지
+        if (_playerPrefab == NetworkPrefabRef.Empty || !_playerPrefab.Equals(_playerModelPrefab))
+        {  
+            _playerPrefab = _playerModelPrefab;
+        }
 
         var playerObject = Runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
 

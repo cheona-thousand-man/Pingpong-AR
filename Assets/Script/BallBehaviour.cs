@@ -28,12 +28,11 @@ public class BallBehaviour : NetworkBehaviour
 
     public void FixedUpdateNetworked()
     {
-        CheckBallDropOrStopped();
-    }
-
-    private void CheckBallDropOrStopped()
-    {
-        throw new NotImplementedException();
+        if (CheckBallStopped())
+        {
+            AddScoreToOwner();
+            StartCoroutine(DroppedBallDespawn());
+        }
     }
 
     private void OnCollisionEnter(Collision other)
@@ -72,6 +71,10 @@ public class BallBehaviour : NetworkBehaviour
         }
     }
 
+    private bool CheckBallStopped()
+    {
+        return _rigidbody.velocity == Vector3.zero && _rigidbody.angularVelocity == Vector3.zero;
+    }
 
     public void SetOwner(PlayerRef playerRef)
     {
@@ -113,8 +116,8 @@ public class BallBehaviour : NetworkBehaviour
         // 1초 경과 후 Despawn 실행
         yield return new WaitForSeconds(1f);
 
-        // Despawn 메서드 호출
-        
+        Debug.Log($"바닥에 떨어진 공 디스폰: {Object.Id}");
+        Runner.Despawn(Object);
     }
 
 }

@@ -58,7 +58,7 @@ public class StartMenu : MonoBehaviour
             GameMode = mode,
             SessionName = roomName,
             Scene = SceneRef.FromIndex(SceneUtility.GetBuildIndexByScenePath(_gameScenePath)),
-            ObjectProvider = default
+            ObjectProvider = _runnerInstance.GetComponent<NetworkObjectPoolDefault>()
         };
         Debug.Log($"Joined Player Name: {LocalPlayerData.NickName}");
 
